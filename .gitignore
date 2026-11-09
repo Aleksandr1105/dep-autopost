@@ -1,0 +1,4 @@
+week-*.json
+cards/*.png
+__pycache__/
+cache/

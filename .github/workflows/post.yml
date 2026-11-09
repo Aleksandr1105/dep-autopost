@@ -1,0 +1,50 @@
+name: Публикация постов
+
+# Время в cron — UTC (Москва = UTC+3). Слоты по Москве: 08:00 09:00 10:30 12:00 13:30 15:00 16:30 18:00 19:30 21:00.
+# Основной запуск за 3 минуты до слота (скрипт сам дождётся точного времени),
+# запасной — через 20 минут после слота, если GitHub задержал или пропустил основной.
+on:
+  schedule:
+    - cron: '57 4,5,8,11,14,17 * * *'   # 07:57 08:57 11:57 14:57 17:57 20:57 МСК
+    - cron: '27 7,10,13,16 * * *'       # 10:27 13:27 16:27 19:27 МСК
+    - cron: '20 5,6,9,12,15,18 * * *'   # запасные
+    - cron: '50 7,10,13,16 * * *'       # запасные
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: post
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests cryptography
+      - name: Расшифровать посты
+        run: python crypto_box.py decrypt-all
+        env:
+          DEP_KEY: ${{ secrets.DEP_KEY }}
+      - name: Опубликовать подошедшие посты
+        run: python post_due.py
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHANNEL: ${{ secrets.CHANNEL }}
+      - name: Сохранить отметки об отправке
+        if: always()
+        run: |
+          git config user.name "dep-autopost"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sent.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Отправленные посты"
+            git pull --rebase
+            git push
+          fi
