@@ -1,0 +1,26 @@
+name: Проверка недели
+
+# Запускается, когда в репозиторий загружают новую неделю: скачивает все фото,
+# проверяет карточки и лимиты Telegram. Если что-то не так — запуск красный и GitHub пришлёт письмо.
+on:
+  push:
+    paths:
+      - '**.enc'
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests cryptography
+      - name: Расшифровать посты
+        run: python crypto_box.py decrypt-all
+        env:
+          DEP_KEY: ${{ secrets.DEP_KEY }}
+      - name: Проверить будущие посты
+        run: python tools/check_week.py

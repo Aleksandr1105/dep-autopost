@@ -8,6 +8,8 @@
 - `crypto_box.py` — шифрование; бот расшифровывает посты только в момент запуска, ключом из секрета `DEP_KEY`.
 - `sent.json` — что уже отправлено. Его ведёт сам скрипт, руками не трогать.
 - `post_due.py` — публикует посты, время которых подошло.
+- `tools/render_cards.py` — рисует карточки из поля `card_data` файла недели (шрифты Unbounded и Golos Text в `tools/fonts`, лицензия OFL).
+- `tools/check_week.py` и `.github/workflows/check.yml` — при загрузке недели GitHub сам скачивает все фото и проверяет посты; если что-то не так, приходит письмо.
 - `.github/workflows/post.yml` — расписание запусков.
 
 Секреты (Settings → Secrets and variables → Actions):
