@@ -33,7 +33,7 @@ LOG_FILE = HERE / "publish-log.txt"
 
 MSK = timezone(timedelta(hours=3))  # Москва, UTC+3 круглый год
 IMG_EXT = (".png", ".jpg", ".jpeg", ".webp")
-UA = "DaEtoPravdaPublisher/1.0 (Telegram channel autoposting script)"
+UA = "DaEtoPravdaPublisher/1.1 (https://github.com/Aleksandr1105/dep-autopost; Telegram channel autoposting)"
 
 # Ограничения Telegram
 CAPTION_MAX = 1024        # подпись к фото (без Premium)
@@ -144,7 +144,10 @@ def when(post) -> datetime:
     return datetime.strptime(f"{post['date']} {post['time']}", "%Y-%m-%d %H:%M").replace(tzinfo=MSK)
 
 
-def prepare(week: dict, no_credit: bool, allow_past: bool = False):
+CREDIT_RESERVE = 130  # строка «Фото: автор / лицензия, Wikimedia Commons» не длиннее этого
+
+
+def prepare(week: dict, no_credit: bool, allow_past: bool = False, offline_photos: bool = False):
     """Проверяет посты и находит картинки. Возвращает (готовые посты, ошибки, предупреждения)."""
     ready, errors, warns = [], [], []
     now = datetime.now(MSK)
@@ -186,6 +189,11 @@ def prepare(week: dict, no_credit: bool, allow_past: bool = False):
             elif p["photo"].startswith("Category:"):
                 errors.append(f"{tag}: в пульте подборка, а не одно фото — выберите фото и положите его "
                               f"в папку photos под именем «{p['date']} {p['time'].replace(':', '-')}.jpg»")
+            elif offline_photos:
+                # проверка без скачивания: существование файла проверяет check_week одним запросом
+                item["image"] = Path("(проверка)")
+                if not no_credit:
+                    item["caption"] = p["text"] + "\n\n" + "x" * CREDIT_RESERVE
             else:
                 try:
                     print(f"  фото {tag}…")

@@ -6,12 +6,15 @@ on:
   push:
     paths:
       - '**.enc'
+      - 'tools/**'
+      - 'publish_week.py'
+      - '.github/workflows/check.yml'
   workflow_dispatch: {}
 
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
