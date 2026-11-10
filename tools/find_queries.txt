@@ -1,116 +1,28 @@
-11-11 10:30|monarch butterfly proboscis
-11-11 12:00|Asian elephant
-11-11 13:30|human heart anatomy
-11-11 15:00|Jupiter Great Red Spot
-11-11 16:30|snowflake macro
-11-11 18:00|hummingbird flying
-11-12 10:30|bamboo forest
-11-12 12:00|giraffe
-11-12 13:30|sunset red sky
-11-12 15:00|bombardier beetle
-11-12 21:00|Mount Everest
-11-13 10:30|clownfish anemone
-11-13 13:30|airplane above clouds
-11-13 15:00|flamingos
-11-13 16:30|tardigrade
-11-13 18:00|Everest Kala Patthar
-11-13 19:30|Albrecht Dürer house Nuremberg
-11-14 12:00|ostrich egg
-11-14 13:30|Morse telegraph key
-11-14 15:00|NeXT computer CERN
-11-14 16:30|Rubik's cube
-11-14 18:00|monkey flower Mimulus
-11-14 21:00|salivary gland
-11-15 10:30|rainbow
-11-15 12:00|ice cubes glass of water
-11-15 13:30|sunflower seeds spiral
-11-15 15:00|emperor penguin
-11-15 16:30|giant squid
-11-15 18:00|phytoplankton bloom satellite
-11-16 10:30|barn owl
-11-16 15:00|Tassili n'Ajjer rock art
-11-16 16:30|koala
-11-16 18:00|diamond graphite
-11-16 19:30|fossil coral
-11-17 10:30|bat flight
-11-17 13:30|Lewis chessmen
-11-17 16:30|Van de Graaff generator
-11-17 19:30|elephant calf
-11-17 21:00|burdock burrs
-11-18 12:00|glass shrimp transparent
-11-18 13:30|Dead Sea floating
-11-19 10:30|wandering albatross
-11-19 13:30|microwave oven
-11-19 18:00|platypus
-11-19 19:30|Messier 87 galaxy
-11-20 10:30|Rhipsalis cactus
-11-20 12:00|sea otters
-11-20 13:30|Colosseum Rome
-11-20 15:00|iron filings magnet
-11-21 10:30|cheetah running
-11-21 12:00|apple blossom
-11-21 16:30|infant skull
-11-21 21:00|Anna's hummingbird
-11-22 12:00|horse lying down
-11-22 15:00|UPC barcode
-11-22 16:30|Jelling runestone
-11-22 18:00|rice terraces
-11-23 16:30|Great Pyramid of Giza
-11-23 18:00|zebra
-11-23 19:30|Yap stone money
-11-24 10:30|three-toed sloth
-11-24 12:00|liquid mercury
-11-24 13:30|wrinkled fingers
-11-24 15:00|Chimborazo volcano
-11-24 16:30|computer mouse
-11-24 19:30|Arctic tern
-11-24 21:00|Mimosa pudica
-11-25 10:30|starfish tube feet
-11-25 13:30|Rosetta Stone
-11-25 16:30|peanut plant
-11-25 18:00|dry ice
-11-25 19:30|ice skating
-11-26 15:00|electrum coin Lydia
-11-26 19:30|penicillin petri dish
-11-26 21:00|Amazon river
-11-27 10:30|polar bear
-11-27 12:00|pineapple plant
-11-27 13:30|pi circle
-11-27 15:00|hard disk drive
-11-27 16:30|Atacama desert
-11-27 18:00|goosebumps
-11-27 19:30|cuttlefish
-11-28 10:30|axolotl
-11-28 12:00|Great Wall of China
-11-28 13:30|Big Ben
-11-28 16:30|ice cubes
-11-28 19:30|honey fungus Armillaria
-11-28 21:00|leafcutter ants
-11-29 10:30|bristlecone pine
-11-29 12:00|megalodon tooth
-11-29 15:00|wooden escalator
-11-29 16:30|Lake Hillier pink lake
-11-29 18:00|dime coin
-11-11 10:30|Danaus plexippus
-11-15 16:30|Architeuthis
-11-21 10:30|Acinonyx jubatus
-11-18 12:00|glass shrimp
-11-18 12:00|Palaemon shrimp
-11-15 13:30|sunflower head
-11-20 10:30|Rhipsalis baccifera
-11-20 10:30|mistletoe cactus
-11-21 16:30|baby head fontanelle
-11-14 21:00|mouth saliva
-11-14 15:00|CERN World Wide Web
-11-13 19:30|Dürerhaus
-11-14 21:00|human mouth anatomy
-11-26 15:00|Lydian coin
-11-23 19:30|Rai stone
-11-29 15:00|escalator
-11-29 12:00|Carcharocles megalodon
-11-27 13:30|Archimedes circle
-11-24 13:30|prune fingers
-11-25 10:30|Asterias starfish
-11-27 19:30|Sepia officinalis
-11-24 19:30|Sterna paradisaea
-11-19 10:30|Diomedea exulans
+11-26 19:30|Penicillium mold
+11-26 19:30|Petri dish mold
+11-21 16:30|baby sleeping newborn
+11-21 16:30|baby head
+11-14 12:00|ostrich egg chicken egg comparison
+11-24 13:30|hand wrinkled water
+11-24 13:30|fingers wrinkled swimming
+11-27 18:00|goose bumps skin
+11-27 18:00|arm hair raised cold
+11-25 18:00|dry ice smoke
+11-25 18:00|dry ice fog
+11-14 15:00|NeXT Cube
+11-19 18:00|Ornithorhynchus anatinus
+11-19 18:00|platypus swimming
+11-22 12:00|horse resting meadow
+11-22 12:00|horse sleeping
+11-16 18:00|diamond crystal
+11-16 18:00|graphite pencil
+11-11 18:00|hummingbird
+11-15 10:30|double rainbow
+11-24 16:30|Engelbart
+11-13 15:00|flamingo
+11-18 12:00|shrimp translucent
+11-17 10:30|Pipistrellus
+11-17 10:30|bat flying night
+11-22 15:00|barcode scanner
+11-27 15:00|IBM 305 RAMAC
+11-27 13:30|pi symbol
