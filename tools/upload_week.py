@@ -52,6 +52,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("source")
     ap.add_argument("--cards", help="папка с PNG карточками (для index.html пульта или если нет card_data)")
+    ap.add_argument("--pult", help="slug@version пульта: запоминается, чтобы не обрабатывать неизменённый пульт повторно")
     a = ap.parse_args()
     src = Path(a.source)
     cards_dir = ROOT / "cards"
@@ -66,6 +67,10 @@ def main():
     uploaded = json.loads(UPLOADED.read_text(encoding="utf-8")) if UPLOADED.exists() else {}
     if uploaded.get(week["week_start"]) == sha:
         print(f"{name}: без изменений, загружать нечего.")
+        if a.pult:
+            slug, ver = a.pult.split("@", 1)
+            uploaded.setdefault("pults", {})[slug] = ver
+            UPLOADED.write_text(json.dumps(uploaded, indent=1, sort_keys=True), encoding="utf-8")
         return
     (ROOT / name).write_text(text, encoding="utf-8")
 
@@ -85,6 +90,9 @@ def main():
     files = [str(ROOT / name)] + [str(cards_dir / f"{b}.png") for b in boards]
     subprocess.run([sys.executable, str(ROOT / "crypto_box.py"), "encrypt", *files], check=True)
     uploaded[week["week_start"]] = sha
+    if a.pult:
+        slug, ver = a.pult.split("@", 1)
+        uploaded.setdefault("pults", {})[slug] = ver
     UPLOADED.write_text(json.dumps(uploaded, indent=1, sort_keys=True), encoding="utf-8")
     print(f"{name}: готово к загрузке ({len(ready)} постов, {len(boards)} карточек). Дальше: git add -A, commit, push.")
 
