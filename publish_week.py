@@ -138,6 +138,31 @@ def commons_photo(file_title: str):
     return path, credit
 
 
+# Сайты, где фото можно публиковать без указания автора (лицензии Unsplash, Pexels, Pixabay; NASA — общественное достояние)
+FREE_PHOTO_HOSTS = ("images.unsplash.com", "images.pexels.com", "cdn.pixabay.com", "pixabay.com",
+                    "images-assets.nasa.gov", "images.nasa.gov", "www.nasa.gov", "science.nasa.gov",
+                    "photojournal.jpl.nasa.gov", "upload.wikimedia.org")
+
+
+def photo_host_ok(url: str) -> bool:
+    host = urllib.parse.urlparse(url).hostname or ""
+    return any(host == h or host.endswith("." + h) for h in FREE_PHOTO_HOSTS)
+
+
+def url_photo(url: str) -> Path:
+    """Скачивает фото по прямой ссылке с разрешённого сайта."""
+    if not photo_host_ok(url):
+        raise RuntimeError(f"сайт не из списка разрешённых: {urllib.parse.urlparse(url).hostname}")
+    CACHE_DIR.mkdir(exist_ok=True)
+    data = http_get(url)
+    if not (data[:3] == b"\xff\xd8\xff" or data[:8] == b"\x89PNG\r\n\x1a\n" or data[8:12] == b"WEBP"):
+        raise RuntimeError("по ссылке не картинка JPG/PNG/WEBP")
+    ext = ".png" if data[:4] == b"\x89PNG" else ".webp" if data[8:12] == b"WEBP" else ".jpg"
+    path = CACHE_DIR / (norm(url)[-80:] + ext)
+    path.write_bytes(data)
+    return path
+
+
 # ---------- подготовка ----------
 
 def when(post) -> datetime:
@@ -197,9 +222,12 @@ def prepare(week: dict, no_credit: bool, allow_past: bool = False, offline_photo
             else:
                 try:
                     print(f"  фото {tag}…")
-                    img, credit = commons_photo(p["photo"])
+                    if p["photo"].startswith("http"):
+                        img, credit = url_photo(p["photo"]), ""
+                    else:
+                        img, credit = commons_photo(p["photo"])
                     item["image"] = img
-                    if not no_credit:
+                    if not no_credit and credit:
                         item["caption"] = p["text"] + "\n\n" + credit
                 except Exception as e:  # сеть, удалённый файл и т. п.
                     errors.append(f"{tag}: фото не скачалось ({e}). Можно положить своё в photos/"
