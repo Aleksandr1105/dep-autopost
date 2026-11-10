@@ -86,7 +86,8 @@ by_week = {}
 for name, e in problems:
     by_week.setdefault(name, []).append(e)
 for name, errs in by_week.items():
-    msg = " || ".join(errs).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-    print(f"::error title={name} ({len(errs)})::{msg}")
+    # коротко: только дата и время постов с проблемами (полный текст — в логе); длинные аннотации GitHub обрезает
+    slots = [e.split(": ", 1)[0] for e in errs]
+    print(f"::error title={name} ({len(errs)})::" + ", ".join(slots))
 print(f"Итого впереди {total} постов, проблем {len(problems)}.")
 sys.exit(1 if problems else 0)
