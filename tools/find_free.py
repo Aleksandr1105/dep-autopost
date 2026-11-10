@@ -42,16 +42,13 @@ def good(r):
 
 if __name__ == "__main__":
     rows = [l.strip().split("|", 1) for l in (Path(__file__).parent / "find_queries.txt").read_text(encoding="utf-8").splitlines() if l.strip()]
-    chunk, n = [], 0
+    out = []
     for slot, q in rows:
         res, seen = [], set()
-        for qq in (q, q + " Unsplash", q + " NASA" if any(w in q for w in ("Jupiter", "Messier", "phytoplankton", "Everest", "Amazon")) else q + " public domain"):
+        for qq in (q, q + " Unsplash", q + " public domain"):
             for r in search(qq, 25):
                 if r[0] not in seen and good(r):
                     seen.add(r[0]); res.append(r)
-        lines = [f"## {slot} {q}"] + [f"  {a[5:]} | {b} | {c[:60]}" for a, b, c in res[:9]]
-        chunk.append("\n".join(lines))
-        if len(chunk) == 6:
-            n += 1; print(f"::notice title=cand{n}::" + "%0A".join(chunk).replace("\n", "%0A")); chunk = []
-    if chunk:
-        print(f"::notice title=cand{n+1}::" + "%0A".join(chunk).replace("\n", "%0A"))
+        out.append(f"## {slot} {q}")
+        out += [f"  {a[5:]} | {b} | {c[:60]}" for a, b, c in res[:9]]
+    (Path(__file__).parent / "find_result.txt").write_text("\n".join(out) + "\n", encoding="utf-8")
