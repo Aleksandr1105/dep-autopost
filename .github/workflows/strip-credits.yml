@@ -1,0 +1,30 @@
+name: Убрать подписи фото
+
+# Разовый запуск: при загрузке tools/strip_credits.py убирает строку автора фото из уже опубликованных постов.
+on:
+  push:
+    paths:
+      - 'tools/strip_credits.py'
+  workflow_dispatch: {}
+
+concurrency:
+  group: post
+  cancel-in-progress: false
+
+jobs:
+  strip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests cryptography
+      - run: python crypto_box.py decrypt-all
+        env:
+          DEP_KEY: ${{ secrets.DEP_KEY }}
+      - run: python tools/strip_credits.py
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHANNEL: ${{ secrets.CHANNEL }}

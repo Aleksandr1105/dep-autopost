@@ -36,7 +36,7 @@ IMG_EXT = (".png", ".jpg", ".jpeg", ".webp")
 UA = "DaEtoPravdaPublisher/1.1 (https://github.com/Aleksandr1105/dep-autopost; Telegram channel autoposting)"
 
 # Ограничения Telegram
-CAPTION_MAX = 1024        # подпись к фото (без Premium)
+CAPTION_MAX = 1024        # подпись к фото (без Premium); строку автора фото по просьбе владельца канала не добавляем (с 10.11.2026)
 TEXT_MAX = 4096           # обычное сообщение
 QUIZ_Q_MAX, QUIZ_OPT_MAX, QUIZ_SOL_MAX = 300, 100, 200
 SCHEDULED_MAX = 100       # отложенных сообщений в одном чате

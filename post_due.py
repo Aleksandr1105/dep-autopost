@@ -123,7 +123,7 @@ def main():
         if wait > 0:
             print(f"  жду {int(wait)} с до {p['time']}…")
             time.sleep(wait)
-        ready, errors, _ = pw.prepare({"posts": [p]}, no_credit=False, allow_past=True)
+        ready, errors, _ = pw.prepare({"posts": [p]}, no_credit=True, allow_past=True)
         if errors or not ready:
             # без картинки не публикуем: лучше увидеть ошибку и поправить, чем выпустить пост «голым»
             failed += 1

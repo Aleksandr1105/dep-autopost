@@ -81,7 +81,7 @@ def main():
         for b in boards:
             shutil.copy(Path(a.cards) / f"{b}.png", cards_dir / f"{b}.png")
 
-    ready, errors, _ = pw.prepare(week, no_credit=False, offline_photos=True)
+    ready, errors, _ = pw.prepare(week, no_credit=True, offline_photos=True)
     if errors:
         for e in errors:
             print("  ✗", e)

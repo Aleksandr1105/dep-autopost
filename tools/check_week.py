@@ -37,7 +37,7 @@ def missing_on_commons(titles):
 total, problems = 0, []
 for wf in sorted(ROOT.glob("week-*.json")):
     week = json.loads(wf.read_text(encoding="utf-8"))
-    ready, errs, _ = pw.prepare(week, no_credit=False, offline_photos=True)
+    ready, errs, _ = pw.prepare(week, no_credit=True, offline_photos=True)
     total += len(ready)
     problems += [(wf.name, e) for e in errs]
     titles = {i["post"]["photo"]: f"{i['post']['date']} {i['post']['time']}" for i in ready
