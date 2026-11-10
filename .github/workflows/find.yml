@@ -1,0 +1,17 @@
+name: Поиск свободных фото
+on:
+  push:
+    paths:
+      - 'tools/find_queries.txt'
+      - 'tools/find_free.py'
+  workflow_dispatch: {}
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python tools/find_free.py
