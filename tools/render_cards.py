@@ -12,6 +12,7 @@ import argparse
 import base64
 import html
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -95,7 +96,7 @@ def main():
                 jobs.append((p["card"], day_card(hd, c, MONTHS[int(p["date"][5:7]) - 1], a.handle)))
     bad = []
     with sync_playwright() as pw:
-        br = pw.chromium.launch()
+        br = pw.chromium.launch(executable_path=os.environ.get("DEP_CARD_CHROMIUM"))
         pg = br.new_page(viewport={"width": 1080, "height": 1080})
         for name, doc in jobs:
             pg.set_content(doc)
